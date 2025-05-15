@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Leyland</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #ef4444;
+            --text-color: #334155;
+            --light-color: #f8fafc;
+            --gray-color: #94a3b8;
+            --gradient-start: #1e3a8a;
+            --gradient-end: #3b82f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(var(--gray-color) 1px, transparent 1px), 
+                radial-gradient(var(--gray-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 6rem 0 5rem;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: 3rem;
+        }
+        
+        .profile-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+        }
+        
+        .profile-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0 4rem;
+            flex: 1 0 auto; /* This makes the container take up all available space */
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .intro {
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            padding: 0 1rem;
+        }
+        
+        .intro p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .link-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+            padding: 1.2rem 1.5rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            width: auto;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .link-card:hover {
+            background-color: white;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .link-icon {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-right: 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        
+        .link-card:hover .link-icon {
+            color: var(--primary-color);
+        }
+        
+        .link-content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .link-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--primary-color);
+        }
+        
+        .link-description {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            margin-bottom: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(59, 130, 246, 0.3);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%);
+            position: relative;
+            flex-shrink: 0; /* Prevents the footer from shrinking */
+            margin-top: auto; /* Pushes the footer to the bottom when content is shorter than viewport */
+        }
+        
+        footer p {
+            margin-top: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Make the cards clickable */
+        .link-card {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .link-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 4rem 0 3rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .intro p {
+                font-size: 1rem;
+            }
+            
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .link-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+            opacity: 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <header>
+        <h1 class="animated delay-1">Patrick Leyland</h1>
+        <p class="tagline animated delay-1">Melbourne, Australia</p>
+        <div class="social-links animated delay-2">
+            <a href="https://theprogressreport.co.nz" class="social-link" target="_blank"><i class="fas fa-chart-line"></i></a>
+            <a href="https://www.linkedin.com/in/patrick-leyland-b4b23a29/" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://bsky.app/profile/patrickleyland.bsky.social" class="social-link" target="_blank"><i class="fas fa-cloud"></i></a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="intro animated delay-2">
+            <h2>Kia ora, welcome.</h2>
+            <p>I'm Patrick Leyland, a digital marketer and data analyst with a passion for politics and polling data.</p>
+            <p>Get in touch via email: <a href="mailto:patrick.leyland@gmail.com">patrick.leyland@gmail.com</a></p>
+        </div>
+        
+        <div class="links">
+            <div class="link-card animated delay-2">
+                <div class="link-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">The Progress Report</div>
+                    <div class="link-description">Tools and data for NZ politics and polling</div>
+                </div>
+                <a href="https://theprogressreport.co.nz" class="btn" target="_blank" style="display:none;">Visit</a>
+            </div>
+            
+            <div class="link-card animated delay-2">
+                <div class="link-icon">
+                    <i class="fab fa-linkedin"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">LinkedIn</div>
+                    <div class="link-description">Professional profile and experience</div>
+                </div>
+                <a href="https://www.linkedin.com/in/patrick-leyland-b4b23a29/" class="btn" target="_blank" style="display:none;">Connect</a>
+            </div>
+            
+            <div class="link-card animated delay-2">
+                <div class="link-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">BlueSky</div>
+                    <div class="link-description">Updates and insights</div>
+                </div>
+                <a href="https://bsky.app/profile/patrickleyland.bsky.social" class="btn" target="_blank" style="display:none;">Follow</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; <span id="current-year"></span> Patrick Leyland.</p>
+    </footer>
+    
+    <script>
+        // Update current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Make the link cards clickable
+        document.querySelectorAll('.link-card').forEach(card => {
+            const link = card.querySelector('a').getAttribute('href');
+            card.addEventListener('click', () => {
+                window.open(link, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
